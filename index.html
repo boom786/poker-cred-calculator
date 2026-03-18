@@ -46,17 +46,17 @@
   <p class="error" id="errorMsg"></p>
   <button class="btn-calc" onclick="calculate()">Calculate Settlements</button>
 
+  <!-- Settlement Modal -->
+  <div id="modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>🃏 Settlements</h2>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
   <script src="app.js"></script>
 </body>
 </html>
-
-<!-- Settlement Modal -->
-<div id="modal" class="modal-overlay" onclick="closeModal(event)">
-  <div class="modal-box">
-    <div class="modal-header">
-      <h2>🃏 Settlements</h2>
-      <button class="modal-close" onclick="closeModal()">✕</button>
-    </div>
-    <div id="modalContent"></div>
-  </div>
-</div>
