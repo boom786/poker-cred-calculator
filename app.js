@@ -48,8 +48,18 @@ function removePlayer(id) {
   if (el) el.remove();
 }
 
+function openModal(content) {
+  document.getElementById('modalContent').innerHTML = content;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal')) {
+    document.getElementById('modal').classList.remove('open');
+  }
+}
+
 function resetResults() {
-  document.getElementById('results').innerHTML = '';
   document.getElementById('errorMsg').textContent = '';
 }
 
@@ -106,24 +116,21 @@ function calculate() {
     if (Math.abs(d.net) < 0.005) di++;
   }
 
-  const resultsDiv = document.getElementById('results');
-
   if (transactions.length === 0) {
-    resultsDiv.innerHTML = '<div class="balanced">✅ Everyone is even — no settlements needed!</div>';
+    openModal('<div class="balanced">✅ Everyone is even — no settlements needed!</div>');
     return;
   }
 
-  transactions.forEach(t => {
-    const div = document.createElement('div');
-    div.className = 'result-item';
-    div.innerHTML = `
+  const html = transactions.map(t => `
+    <div class="result-item">
       <span class="payer">${t.from}</span>
       <span class="arrow">pays</span>
       <span class="receiver">${t.to}</span>
       <span class="amount">₹${t.amount.toFixed(2)}</span>
-    `;
-    resultsDiv.appendChild(div);
-  });
+    </div>
+  `).join('');
+
+  openModal(html);
 }
 
 // init with 4 players
